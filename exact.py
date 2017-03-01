@@ -1,3 +1,13 @@
+#------------------------------------------------------
+# Exact diagonalization code for the 2D Hubbard model
+#
+#                               　　　　　　　　 YN, Ph.D
+#                                03/01/2017(mm/dd/yyyy)
+#This might have bugs.
+#This code is just for studying the ED method.
+#
+#
+#------------------------------------------------------
 from scipy.sparse import lil_matrix,csr_matrix
 #from scipy.linalg
 from scipy.sparse import linalg
@@ -279,7 +289,7 @@ def main():
     U = -2.0
     mu = U/2
     nx = 2
-    ny = 3
+    ny = 2
     beta = 10.0
     nc = nx*ny
     nf = 4**nc
@@ -292,8 +302,8 @@ def main():
 #------------------------------------------------
     
 
-    fulldiag = True
-#    fulldiag = False    
+#    fulldiag = True
+    fulldiag = False    
     
     if fulldiag:
         print "----------------------------------------"
@@ -313,8 +323,8 @@ def main():
     
 
 #Number conservation with each spin is used-----
-    nfix = True
-#    nfix = False
+#    nfix = True
+    nfix = False
 
     nup = nc/2
     ndown = nc/2
