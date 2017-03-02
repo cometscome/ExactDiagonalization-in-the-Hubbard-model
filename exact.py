@@ -1,7 +1,6 @@
 #------------------------------------------------------
 # Exact diagonalization code for the 2D Hubbard model
-#
-#                               　　　　　　　　 YN, Ph.D
+#                                  YN, Ph.D
 #                                03/01/2017(mm/dd/yyyy)
 #This might have bugs.
 #This code is just for studying the ED method.
@@ -302,8 +301,8 @@ def main():
 #------------------------------------------------
     
 
-#    fulldiag = True
-    fulldiag = False    
+    fulldiag = True
+#    fulldiag = False    
     
     if fulldiag:
         print "----------------------------------------"
@@ -323,8 +322,8 @@ def main():
     
 
 #Number conservation with each spin is used-----
-#    nfix = True
-    nfix = False
+    nfix = True
+#    nfix = False
 
     nup = nc/2
     ndown = nc/2
