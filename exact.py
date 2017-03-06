@@ -469,7 +469,7 @@ def main():
     print "Periodix boundary condision in x-direction:",tri_periodic_x
     print "Periodix boundary condision in y-direction:",tri_periodic_y
 
-    import rscg
+#    import rscg
 
 
 #------------------------------------------------
