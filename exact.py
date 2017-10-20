@@ -538,9 +538,9 @@ def main():
         print "Minimum eigenvalue with fixed n:",wf
         print "Time for calcualting eigenvalues:", time.time() -start
 
-        mat_hr = mat_hr.todense()
-        l, P = np.linalg.eig(mat_hr)
-        print l
+        #mat_hr = mat_hr.todense()
+        #l, P = np.linalg.eig(mat_hr)
+        #print l
 
         eps = 1e-6
         nsigma = 100
