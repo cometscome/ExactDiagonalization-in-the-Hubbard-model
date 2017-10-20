@@ -17,7 +17,7 @@ import scipy.misc as scm
 import itertools
 import time
 
-def calc_matc(isite,nx,ny,p):
+def calc_matc_f(isite,nx,ny,p):
     nc = nx*ny
     nf = 4**nc
     mat_c = lil_matrix((nf,nf))
@@ -128,7 +128,7 @@ def exact_init(nx,ny):
     mat_cdc = lil_matrix((nf,nf))
 
     for isite in range(nc*2):
-        mat_c = calc_matc(isite,nx,ny,0)
+        mat_c = calc_matc_f(isite,nx,ny,0)
 #        print isite,mat_c
         mat_cvec += (mat_c,)
         mat_cdc = mat_c.T
@@ -440,14 +440,14 @@ def exact_init_fix2():
 U = -2.0
 mu = U/2
 nx = 2
-ny = 2
+ny = 4
 beta = 100.0
 nc = nx*ny
 nf = 4**nc
 tri_periodic_x = False
 tri_periodic_y = False
-fulldiag = False
-#    fulldiag = False    
+#fulldiag = True
+fulldiag = False    
 nfix = True
 #    nfix = False
 calc_Green = True
@@ -486,8 +486,11 @@ def main():
         mat_h = const_h(nx,ny,nf,mu,U,mat_cvec,mat_cdvec)
 
         x = sc.rand(nf,1)
+        print mat_h.tocsc()
         print "Hamiltonian is constructed"
+        start = time.time()
         w,v = sc.sparse.linalg.lobpcg(mat_h,x,largest=None)
+        print "Time for calcualting eigenvalues:", time.time() -start
         print "Minimum eigenvalue",w
         print "----------------------------------------"
 
@@ -517,22 +520,27 @@ def main():
 #        print "Time for constructing operators (slow):", time.time() -start
 #-------------------------------------------------------------
         mat_hr = const_h(nx,ny,mf,mu,U,mat_cvecf,mat_cdvecf)
+        #print mat_hr.tocsc()
 #        print mat_cvecf
         
         
-
+        
 
 
 #        mat_exphr = sc.sparse.linalg.expm(mat_hr)
 #        print mat_exphr
+   
 
-
-
+ 
         xf = sc.rand(mf,1)
         start2 = time.time()
         wf,vf = sc.sparse.linalg.lobpcg(mat_hr,xf,largest=None)
         print "Minimum eigenvalue with fixed n:",wf
         print "Time for calcualting eigenvalues:", time.time() -start
+
+        mat_hr = mat_hr.todense()
+        l, P = np.linalg.eig(mat_hr)
+        print l
 
         eps = 1e-6
         nsigma = 100
